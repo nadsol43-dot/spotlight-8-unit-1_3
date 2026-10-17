@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Grammar Exercise</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+            margin: 0;
+        }
+
+        /* Mac-style Window Container */
+        .email-window {
+            background-color: #f9f9f9;
+            max-width: 650px;
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            border: 1px solid #d1d1d1;
+        }
+
+        /* Window Header (Purple) */
+        .window-header {
+            background-color: #b3b3db;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #a3a3cb;
+        }
+
+        .window-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot.red { background-color: #ff5f56; }
+        .dot.yellow { background-color: #ffbd2e; }
+        .dot.green { background-color: #27c93f; }
+
+        .window-title {
+            font-weight: bold;
+            color: white;
+            font-size: 1.2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            flex-grow: 1;
+            text-align: center;
+            padding-right: 50px; /* offset the dots to center the text */
+        }
+
+        .window-icons {
+            display: flex;
+            gap: 10px;
+            color: #7a7aa6;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        /* Email Body */
+        .email-body {
+            padding: 30px;
+            font-size: 1.05rem;
+            line-height: 2.4; /* Tall line height for inline inputs */
+            color: #444;
+        }
+
+        p {
+            margin: 0 0 20px 0;
+        }
+
+        /* Inline Inputs */
+        input[type="text"] {
+            font-family: inherit;
+            font-size: 1rem;
+            padding: 2px 6px;
+            border: none;
+            border-bottom: 1px dotted #999;
+            background-color: transparent;
+            color: #000;
+            text-align: center;
+            transition: all 0.2s;
+            width: 140px; /* Default width */
+        }
+
+        /* Adjust widths for longer answers */
+        .w-long { width: 180px; }
+        .w-med { width: 130px; }
+        .w-short { width: 80px; }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-bottom: 2px solid #2196F3;
+            background-color: #e3f2fd;
+        }
+
+        /* Parenthetical hints */
+        .hint {
+            color: #777;
+            font-style: italic;
+            font-size: 0.95rem;
+            margin-left: 2px;
+        }
+
+        .number {
+            font-weight: bold;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* Feedback States */
+        input.correct {
+            border-bottom: 2px solid #4CAF50;
+            color: #2e7d32;
+            font-weight: bold;
+        }
+
+        input.incorrect {
+            border-bottom: 2px solid #f44336;
+            color: #c62828;
+            text-decoration: line-through;
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            gap: 15px;
+            padding: 20px 30px;
+            background-color: #e9e9e9;
+            border-top: 1px solid #d1d1d1;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            flex: 1;
+        }
+
+        #check-btn {
+            background-color: #27c93f;
+            color: white;
+        }
+
+        #check-btn:hover { background-color: #1eb233; }
+
+        #reset-btn {
+            background-color: #fff;
+            color: #555;
+            border: 1px solid #ccc;
+        }
+
+        #reset-btn:hover { background-color: #f0f0f0; }
+
+    </style>
+</head>
+<body>
+
+    <div class="email-window">
+        <div class="window-header">
+            <div class="window-controls">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+            </div>
+            <div class="window-title">email</div>
+            <div class="window-icons">
+                <span>&#9723;</span> <!-- Placeholder for window icons -->
+                <span>&#10005;</span>
+            </div>
+        </div>
+
+        <div class="email-body">
+            <p>Hi Katie,</p>
+
+            <p>
+                How are you? Yesterday while I <span class="number">1)</span>
+                <input type="text" class="w-med" data-answer="was cleaning" placeholder="...">
+                <span class="hint">(clean)</span> the attic, I <span class="number">2)</span>
+                <input type="text" class="w-short" data-answer="came" placeholder="...">
+                <span class="hint">(come)</span> across some old photos from school so I <span class="number">3)</span>
+                <input type="text" class="w-short" data-answer="thought" placeholder="...">
+                <span class="hint">(think)</span> of you! We <span class="number">4)</span>
+                <input type="text" class="w-long" data-answer="have both changed|both have changed|'ve both changed" placeholder="...">
+                <span class="hint">(both/change)</span> in the last few years!
+            </p>
+
+            <p>
+                I <span class="number">5)</span>
+                <input type="text" class="w-long" data-answer="have been studying|'ve been studying" placeholder="...">
+                <span class="hint">(study)</span> really hard lately because I really <span class="number">6)</span>
+                <input type="text" class="w-short" data-answer="want" placeholder="...">
+                <span class="hint">(want)</span> to win the scholarship I <span class="number">7)</span>
+                <input type="text" class="w-short" data-answer="told" placeholder="...">
+                <span class="hint">(tell)</span> you about the last time you <span class="number">8)</span>
+                <input type="text" class="w-short" data-answer="were" placeholder="...">
+                <span class="hint">(be)</span> in town. I rarely <span class="number">9)</span>
+                <input type="text" class="w-short" data-answer="go" placeholder="...">
+                <span class="hint">(go)</span> out because I have so much work to do. I <span class="number">10)</span>
+                <input type="text" class="w-med" data-answer="didn't even go|did not even go" placeholder="...">
+                <span class="hint">(even/not/go)</span> to Maria's birthday party last Friday.
+            </p>
+
+            <p>
+                I <span class="number">11)</span>
+                <input type="text" class="w-med" data-answer="am thinking|'m thinking" placeholder="...">
+                <span class="hint">(think)</span> of taking a break and coming to visit you next week. What <span class="number">12)</span>
+                <input type="text" class="w-med" data-answer="do you think" placeholder="...">
+                <span class="hint">(you/think)</span>? I <span class="number">13)</span>
+                <input type="text" class="w-long" data-answer="have already asked|'ve already asked" placeholder="...">
+                <span class="hint">(already/ask)</span> my mum and she <span class="number">14)</span>
+                <input type="text" class="w-short" data-answer="agreed|has agreed|'s agreed" placeholder="...">
+                <span class="hint">(agree)</span>.
+            </p>
+
+            <p>
+                Anyway, I must go. I think I <span class="number">15)</span>
+                <input type="text" class="w-med" data-answer="will have|'ll have|am going to have|'m going to have" placeholder="...">
+                <span class="hint">(have)</span> an early night. I <span class="number">16)</span>
+                <input type="text" class="w-long" data-answer="have just finished|'ve just finished" placeholder="...">
+                <span class="hint">(just/finish)</span> an essay on Hamlet and I <span class="number">17)</span>
+                <input type="text" class="w-short" data-answer="feel|am feeling|'m feeling" placeholder="...">
+                <span class="hint">(feel)</span> really tired! Write back when you get some time!
+            </p>
+
+            <p>Kisses,<br>Emma</p>
+        </div>
+
+        <div class="controls">
+            <button id="check-btn">Check Answers</button>
+            <button id="reset-btn">Reset</button>
+        </div>
+    </div>
+
+    <script>
+        const inputs = document.querySelectorAll('input[type="text"]');
+        const checkBtn = document.getElementById('check-btn');
+        const resetBtn = document.getElementById('reset-btn');
+
+        // Normalize strings for accurate comparison (case, spaces, punctuation)
+        function cleanString(str) {
+            return str
+                .toLowerCase()
+                .replace(/[.,!?;:]/g, '') // Remove punctuation
+                .replace(/\s+/g, ' ')     // Collapse multiple spaces into one
+                .trim();
+        }
+
+        // Validate Answers
+        checkBtn.addEventListener('click', () => {
+            inputs.forEach(input => {
+                const userAnswer = cleanString(input.value);
+                const acceptableAnswers = input.getAttribute('data-answer').split('|');
+                
+                // Check if user answer matches any of the allowed variations
+                const isCorrect = acceptableAnswers.some(ans => cleanString(ans) === userAnswer);
+
+                if (userAnswer === '') {
+                    input.classList.remove('correct', 'incorrect');
+                } else if (isCorrect) {
+                    input.classList.remove('incorrect');
+                    input.classList.add('correct');
+                } else {
+                    input.classList.remove('correct');
+                    input.classList.add('incorrect');
+                }
+            });
+        });
+
+        // Reset Activity
+        resetBtn.addEventListener('click', () => {
+            inputs.forEach(input => {
+                input.value = '';
+                input.classList.remove('correct', 'incorrect');
+            });
+        });
+
+        // Allow pressing "Enter" to check answers
+        inputs.forEach(input => {
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkBtn.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
